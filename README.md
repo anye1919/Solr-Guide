@@ -9,9 +9,9 @@ Solr是一个独立的企业级搜索应用服务器，它对外提供类似于W
 
 ##Solr的安装与配置
 
-1、安装jdk1.6.0_27
+1、安装jdk1.6.0_27 [点击下载](https://code.google.com/p/hello-kitty-time/downloads/detail?name=jdk1.6.0_27.zip&can=2&q=)
 
-2、下载solr-4.7.2
+2、下载solr-4.7.2 [点击下载](http://sourceforge.net/projects/solr.mirror/files/Solr%204.7.2/)
 
 3、下载apache-tomcat-6.0.43
 
