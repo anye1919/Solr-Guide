@@ -13,7 +13,26 @@ Solr是一个独立的企业级搜索应用服务器，它对外提供类似于W
 
 2、下载solr-4.7.2
 
-3、复制solr-4.7.2目录example/solr到Tomcat的根目录下
+3、下载apache-tomcat-6.0.43
+
+4、复制solr-4.7.2/example下的solr文件夹到Tomcat的根目录下
+
+5、复制solr-4.7.2/dist下的solr-4.7.2.war到apache-tomcat-6.0.43/webapps文件夹下，并重命名为：solr.war
+
+6、复制solr-4.7.2/example/lib/ext文件夹下的所有jar到apache-tomcat-6.0.43/lib下
+
+7、复制solr-4.7.2/example/resources下的log4j.properties文件到apache-tomcat-6.0.43/lib下
+
+8、在文件夹apache-tomcat-6.0.43/conf/Catalina/localhost下创建solr.xml，内容如下：
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<Context docBase="webapps/solr.war" debug="0" crossContext="true">
+  <Environment name="solr/home" type="java.lang.String" value="c:/Program Files/Apache Software Foundation /Tomcat7/solr" override="true"/>
+</Context>
+```
+9、重启Tomcat服务器，在浏览器输入http://localhost:8080/solr 能看到solr的页面就表示安装成功了
+
 
 
 
