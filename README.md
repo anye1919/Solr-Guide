@@ -15,7 +15,7 @@ Solr是一个独立的企业级搜索应用服务器，它对外提供类似于W
 
 3、下载apache-tomcat-6.0.43
 
-4、复制solr-4.7.2/example下的solr文件夹到Tomcat的根目录下
+4、复制solr-4.7.2/example下的solr文件夹到Tomcat的根目录下（其实可以放到任何目录，这个目录就是下面配置文件solr.xml中solr/home的值）
 
 5、复制solr-4.7.2/dist下的solr-4.7.2.war到apache-tomcat-6.0.43/webapps文件夹下，并重命名为：solr.war
 
@@ -27,7 +27,8 @@ Solr是一个独立的企业级搜索应用服务器，它对外提供类似于W
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <Context docBase="webapps/solr.war" debug="0" crossContext="true">
-  <Environment name="solr/home" type="java.lang.String" value="c:/Program Files/Apache Software Foundation /Tomcat7/solr" override="true"/>
+  <!-- 设置环境变量solr/home的值为solr的目录：E:/apache-tomcat-6.0.43/solr -->
+  <Environment name="solr/home" type="java.lang.String" value="E:/apache-tomcat-6.0.43/solr" override="true"/>
 </Context>
 ```
 9、重启Tomcat服务器，在浏览器输入http://localhost:8080/solr 能看到solr的页面就表示安装成功了
@@ -46,6 +47,6 @@ Solr是一个独立的企业级搜索应用服务器，它对外提供类似于W
 </fieldType>
 ```
 
-4、启动Tomcat服务器，在浏览器中输入http://localhost:8080/solr ,在页面左侧Core Selector下拉框选择collection1，点击Analysis菜单，在右侧页面Field Value (Index)文本框中输入要测试分词的中文语句，在下方Analyse FieldName/FieldType中选择text_ik，然后点击左侧Analyse Values按钮就能看到分词结果了
+4、启动Tomcat服务器，在浏览器中输入http://localhost:8080/solr，在页面左侧Core Selector下拉框选择collection1，点击Analysis菜单，在右侧页面Field Value (Index)文本框中输入要测试分词的中文语句，在下方Analyse FieldName/FieldType中选择text_ik，然后点击左侧Analyse Values按钮就能看到分词结果了
 
 
