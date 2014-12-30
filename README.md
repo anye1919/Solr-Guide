@@ -9,11 +9,11 @@ Solr是一个独立的企业级搜索应用服务器，它对外提供类似于W
 
 ##Solr的安装与配置
 
-1、安装jdk1.6.0_27 [点击下载](https://code.google.com/p/hello-kitty-time/downloads/detail?name=jdk1.6.0_27.zip&can=2&q=)
+1、[到此下载jdk1.6.0_27](http://java.sun.com/j2se/downloads.html)
 
-2、下载solr-4.7.2 [点击下载](http://sourceforge.net/projects/solr.mirror/files/Solr%204.7.2/)
+2、[到此下载solr-4.7.2](http://www.apache.org/dyn/closer.cgi/lucene/solr/)
 
-3、下载apache-tomcat-6.0.43
+3、[到此下载apache-tomcat-6.0.43](http://tomcat.apache.org/)
 
 4、复制solr-4.7.2/example下的solr文件夹到Tomcat的根目录下（其实可以放到任何目录，这个目录就是下面配置文件solr.xml中solr/home的值）
 
