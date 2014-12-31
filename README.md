@@ -156,7 +156,7 @@ Solr是一个独立的企业级搜索应用服务器，它对外提供类似于W
 ```
 <field name="uid" type="text_general" indexed="true" stored="true"/>
 <field name="email" type="text_general" indexed="true" stored="true"/>
-<field name="address" type="text_ik" indexed="true" stored="true"/>
+<field name="address" type="text_ik" indexed="true" stored="true"/><!-- 对address字段进行中文分词 -->
 ```
 
 - 导入相关jar包
