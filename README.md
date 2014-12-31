@@ -110,7 +110,60 @@ Solr是一个独立的企业级搜索应用服务器，它对外提供类似于W
 ```
 - 重启Tomcat，打开Solr管理界面，就可以看到有3个core可供选择了
 
+##使用Dataimport模块从mysql导入数据
 
+- 在E:\apache-tomcat-6.0.43\solr\collection1\conf\solrconfig.xml中添加以下内容，增加导入数据功能
+```
+  <requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">   
+    <lst name="defaults">   
+      <str name="config">data-config.xml</str>   
+    </lst>   
+  </requestHandler>
+```
+- 在同一目录下添加数据源配置文件：data-config.xml，内容如下：
+```
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataConfig>
+ 
+  <dataSource type="JdbcDataSource"
+
+   driver="com.mysql.jdbc.Driver"
+ 
+   url="jdbc:mysql://172.0.0.1:3306/testdb"
+ 
+   user="root"
+ 
+   password=""/>
+ 
+    <document name="content">
+ 
+        <!-- 
+        entity的内容来自于“query”查询得到的结果
+        field对应查询出的字段信息，“column”对应数据库字段名，“name”必须对应“schema.xml”中配置的field值 
+        -->
+        <entity name="member" query="select * from t_pf_member_details">
+            <field column="id" name="id" />
+            <field column="uid" name="uid" />
+            <field column="email" name="email" />
+            <field column="address" name="address" />
+        </entity>
+ 
+    </document>
+
+</dataConfig>
+```
+- 修改schema.xml配置，添加相关字段的定义
+```
+<field name="uid" type="text_general" indexed="true" stored="true"/>
+<field name="email" type="text_general" indexed="true" stored="true"/>
+<field name="address" type="text_ik" indexed="true" stored="true"/>
+```
+
+- 导入相关jar包
+因为使用mysql作为数据源，所以需要驱动包mysql-connector.jar；另外，使用dataimport功能还需要solr-dataimporthandler-4.7.2.jar和solr-dataimporthandler-extras-4.7.2.jar，这两个jar包不需要下载，在\dist目录下
+复制这三个jar包到tomcat下的solr工程下的lib目录下（webapps\solr\WEB-INF\lib）
+
+- 重启Tomcat，打开Solr管理界面的Dataimport功能，选择full-import全量导入，执行就行了
 
 #Lucene/Solr常用资源
 
