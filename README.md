@@ -72,7 +72,7 @@ Solr使用手册下载地址
 
 [http://archive.apache.org/dist/lucene/solr/ref-guide/](http://archive.apache.org/dist/lucene/solr/ref-guide/)
 
-分词器
+##分词器
 
 mmseg4j
 
