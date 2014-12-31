@@ -48,6 +48,70 @@ Solr是一个独立的企业级搜索应用服务器，它对外提供类似于W
 ```
 - 启动Tomcat服务器，在浏览器中输入http://localhost:8080/solr，在页面左侧Core Selector下拉框选择collection1，点击Analysis菜单，在右侧页面Field Value (Index)文本框中输入要测试分词的中文语句，在下方Analyse FieldName/FieldType中选择text_ik，然后点击左侧Analyse Values按钮就能看到分词结果了
 
+##使用Documents模块导入数据
+
+文件上传模式：文档类型选择File Upload，从D:\solr-4.7.2\example\exampledocs目录下选择定义好的文档money.xml，提交后Solr就会对该文档进行解析并建立索引
+
+##使用Query模块查询数据
+
+在money.xml中有name为manu的field，在q输入框里输入manu:bank，点击Execute Query按钮执行查询，就可以查询出manu这个field包含bank的所有文档
+
+##配置多个core
+
+- 将D:\solr-4.7.2\example\multicore文件夹下的core0和core1文件夹复制到E:\apache-tomcat-6.0.43\solr文件夹，因为此文件夹已经有一个名为collection1的core，所以现在有了3个core存在
+- 修改solr.xml配置文件，文件内容如下：
+```
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 单core的配置 -->
+<!-- <solr>
+
+  <solrcloud>
+    <str name="host">${host:}</str>
+    <int name="hostPort">${jetty.port:8983}</int>
+    <str name="hostContext">${hostContext:solr}</str>
+    <int name="zkClientTimeout">${zkClientTimeout:30000}</int>
+    <bool name="genericCoreNodeNames">${genericCoreNodeNames:true}</bool>
+  </solrcloud>
+
+  <shardHandlerFactory name="shardHandlerFactory"
+    class="HttpShardHandlerFactory">
+    <int name="socketTimeout">${socketTimeout:0}</int>
+    <int name="connTimeout">${connTimeout:0}</int>
+  </shardHandlerFactory>
+
+</solr> -->
+
+<!-- 多core的配置 -->
+<solr persistent="true" sharedLib="lib">
+  
+  <property name="snapshooter" value="/home/solr-user/solr/bin/snapshooter.sh" />
+
+  <cores adminPath="/admin/cores" host="${host:}" hostPort="${jetty.port:8080}" hostContext="${hostContext:solr}">
+    <!-- name：code的名字，instanceDir：core对应的目录相对于主目录的路径 -->
+    <core name="collection1" instanceDir="collection1">
+      <!-- confDir：配置文件的目录路径，即conf目录，默认是core下的conf目录 -->
+      <!-- <property name="confDir" value="E:\apache-tomcat-6.0.43\solr\collection1\conf" /> -->
+      <!-- dataDir：数据文件的目录路径，即data目录，默认是core下的data目录 -->
+      <!-- <property name="dataDir" value="E:\apache-tomcat-6.0.43\solr\collection1\data" /> -->
+    </core>
+    <core name="core0" instanceDir="core0">
+      <!-- <property name="dataDir" value="E:\apache-tomcat-6.0.43\solr\core0\data" /> -->
+    </core>
+    <core name="core1" instanceDir="core1">
+      <!-- <property name="dataDir" value="E:\apache-tomcat-6.0.43\solr\core1\data" /> -->
+    </core>
+  </cores>
+  
+  <shardHandlerFactory name="shardHandlerFactory" class="HttpShardHandlerFactory">
+    <str name="urlScheme">${urlScheme:}</str>
+  </shardHandlerFactory>
+         
+</solr>
+```
+- 重启Tomcat，打开Solr管理界面，就可以看到有3个core可供选择了
+
+
+
 #Lucene/Solr常用资源
 
 Solr官方wiki
