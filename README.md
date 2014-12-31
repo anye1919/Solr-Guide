@@ -160,8 +160,10 @@ Solr是一个独立的企业级搜索应用服务器，它对外提供类似于W
 ```
 
 - 导入相关jar包
+
 因为使用mysql作为数据源，所以需要驱动包mysql-connector.jar；另外，使用dataimport功能还需要solr-dataimporthandler-4.7.2.jar和solr-dataimporthandler-extras-4.7.2.jar，这两个jar包不需要下载，在\dist目录下
 复制这三个jar包到tomcat下的solr工程下的lib目录下（webapps\solr\WEB-INF\lib）
+
 
 - 重启Tomcat，打开Solr管理界面的Dataimport功能，选择full-import全量导入，执行就行了
 
